@@ -92,7 +92,7 @@ class RedisExtension extends Nette\DI\CompilerExtension
 		}
 
 		if ($config['storage']) {
-			$storageConfig = Nette\DI\Config\Helpers::merge(is_array($config['storage']) ? $config['storage'] : array(), array(
+			$storageConfig = Nette\Config\Helpers::merge(is_array($config['storage']) ? $config['storage'] : array(), array(
 				'locks' => TRUE,
 			));
 
@@ -108,7 +108,7 @@ class RedisExtension extends Nette\DI\CompilerExtension
 		}
 
 		if ($config['session']) {
-			$sessionConfig = Nette\DI\Config\Helpers::merge(is_array($config['session']) ? $config['session'] : array(), array(
+			$sessionConfig = Nette\Config\Helpers::merge(is_array($config['session']) ? $config['session'] : array(), array(
 				'host' => $config['host'],
 				'port' => $config['port'],
 				'weight' => 1,
@@ -165,7 +165,7 @@ class RedisExtension extends Nette\DI\CompilerExtension
 
 		foreach ($builder->getDefinition('session')->setup as $statement) {
 			if ($statement->entity === 'setOptions') {
-				$statement->arguments[0] = Nette\DI\Config\Helpers::merge($options, $statement->arguments[0]);
+				$statement->arguments[0] = Nette\Config\Helpers::merge($options, $statement->arguments[0]);
 				unset($options);
 				break;
 			}
