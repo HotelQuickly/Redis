@@ -96,15 +96,15 @@ class RedisExtension extends Nette\DI\CompilerExtension
 				'locks' => TRUE,
 			));
 
-			$cacheStorage = $builder->addDefinition($this->prefix('cacheStorage'))
+			$redisCacheStorage = $builder->addDefinition($this->prefix('redisCacheStorage'))
 				->setClass('Kdyby\Redis\RedisStorage');
 
 			if (!$storageConfig['locks']) {
-				$cacheStorage->addSetup('disableLocking');
+				$redisCacheStorage->addSetup('disableLocking');
 			}
 
-			$builder->removeDefinition('cacheStorage');
-			$builder->addDefinition('cacheStorage')->setFactory($this->prefix('@cacheStorage'));
+			$builder->removeDefinition('redisCacheStorage');
+			$builder->addDefinition('redisCacheStorage')->setFactory($this->prefix('@redisCacheStorage'));
 		}
 
 		if ($config['session']) {
