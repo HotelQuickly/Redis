@@ -23,7 +23,7 @@ use Nette\Utils\Json;
  *
  * @author Filip Procházka <filip@prochazka.su>
  */
-class RedisStorage extends Nette\Object implements Nette\Caching\IStorage
+class RedisStorage extends Nette\Object
 {
 
 	/** @internal cache structure */
