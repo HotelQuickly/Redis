@@ -13,7 +13,7 @@ namespace Kdyby\Redis\Driver;
 use Kdyby;
 use Nette;
 
-
+error_reporting(0);
 
 /**
  * @author Filip Procházka <filip@prochazka.su>
