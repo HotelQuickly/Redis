@@ -186,9 +186,13 @@ class RedisExtension extends Nette\DI\CompilerExtension
 	{
 		$config = $this->getConfig($this->defaults);
 		if ($config['versionCheck'] && ($config['journal'] || $config['storage'] || $config['session'])) {
-			$client = new RedisClient($config['host'], $config['port'], $config['database'], $config['timeout'], $config['auth']);
-			$client->assertVersion();
-			$client->close();
+			try {
+				$client = new RedisClient($config['host'], $config['port'], $config['database'], $config['timeout'], $config['auth']);
+				$client->assertVersion();
+				$client->close();
+			} catch (Kdyby\Redis\RedisClientException $e) {
+				// we will not connect Redis on unit test, then do nothing
+			}
 		}
 	}
 
